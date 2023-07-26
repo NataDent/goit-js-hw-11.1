@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import simpleLightbox from 'simplelightbox';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
@@ -43,6 +42,7 @@ async function onSubmit(e) {
     }
     else {
       Notify.success(`Hooray! We found ${totalHits} images.`);
+      refs.loadMore.style.display = 'block';
     }
 
     const markup = resp.data.hits.map(createMarkup).join('');
@@ -96,11 +96,11 @@ async function onLoadMore() {
    
     lightbox.refresh();
 
-//     if (page === Math.ceil(totalHits / 40)) {
-//       console.log(page);
-//       refs.loadMore.style.display = 'none';
-//       Notify.info("We're sorry, but you've reached the end of search results.")
-// }
+    if (page === Math.ceil(totalHits / 40)) {
+      console.log(page);
+      refs.loadMore.style.display = 'none';
+      Notify.info("We're sorry, but you've reached the end of search results.")
+}
     }
    catch (err) {
     Notify.failure(err.message);
@@ -122,4 +122,4 @@ async function onLoadMore() {
 //   console.dir(refs.gallery.children.length)
  
 //   }
-// })
+//
