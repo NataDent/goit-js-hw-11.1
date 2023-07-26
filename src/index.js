@@ -48,7 +48,9 @@ async function onSubmit(e) {
     const markup = resp.data.hits.map(createMarkup).join('');
       
     refs.gallery.innerHTML = markup;
+    
     if (totalHits > 0 && totalHits <= 40) {
+      refs.loadMore.style.display = 'none';
       Notify.info("We're sorry, but you've reached the end of search results.");
 }
     
